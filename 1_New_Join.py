@@ -1,3 +1,7 @@
+name = input('ティッカーシンボルを入力: ')
+
+
+
 import openpyxl
 
 # バランスシート
@@ -43,7 +47,7 @@ is_result = pd.read_excel("is_result.xlsx")
 
 name_result = pd.merge(bsf_result, is_result, on='Breakdown')
 
-name_result.to_excel('../0_Storage/name_result.xlsx', index=False)
+name_result.to_excel('../0_Storage/{0}_result.xlsx'.format(name), index=False)
 
 
 
