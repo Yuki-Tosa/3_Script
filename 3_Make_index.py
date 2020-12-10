@@ -9,10 +9,10 @@ tmp_result = pd.read_excel(in_workbook_pass)
 
 result = tmp_result[['Breakdown', 'Total Revenue', 'Net Income Common Stockholders', 'Total Assets', 'Common Stock Equity', 'Ordinary Shares Number']]
 
-result['Total Revenue TTM'] = result['Total Revenue'] + result['Total Revenue'].shift(1) + result['Total Revenue'].shift(2) + result['Total Revenue'].shift(3)
-result['Net Income Common Stockholders TTM'] = result['Net Income Common Stockholders'] + result['Net Income Common Stockholders'].shift(1) + result['Net Income Common Stockholders'].shift(2) + result['Net Income Common Stockholders'].shift(3)
-result['Total Assets ATTM'] = (result['Total Assets'] + result['Total Assets'].shift(1) + result['Total Assets'].shift(2) + result['Total Assets'].shift(3)) / 4
-result['Common Stock Equity ATTM'] = (result['Common Stock Equity'] + result['Common Stock Equity'].shift(1) + result['Common Stock Equity'].shift(2) + result['Common Stock Equity'].shift(3)) / 4
+result['Total Revenue TTM'] = result['Total Revenue'].rolling(4).sum()
+result['Net Income Common Stockholders TTM'] = result['Net Income Common Stockholders'].rolling(4).sum()
+result['Total Assets ATTM'] = result['Total Assets'].rolling(4).sum() / 4
+result['Common Stock Equity ATTM'] = result['Common Stock Equity'].rolling(4).sum() / 4
 
 result_copy = result.copy()
 result_fillna = result_copy.fillna('-')
